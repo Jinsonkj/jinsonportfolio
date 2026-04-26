@@ -1,6 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Contact = () => {
+    const [status, setStatus] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus('submitting');
+        
+        const form = e.target;
+        const data = new FormData(form);
+
+        try {
+            await fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3udZSRWz9slCLdnhsd7gKTQJVFSnvlPp1XTsky3XcK71fFw/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: data
+            });
+            setStatus('');
+            setShowPopup(true);
+            form.reset();
+            setTimeout(() => setShowPopup(false), 5000);
+        } catch (error) {
+            console.error('Error submitting form', error);
+            setStatus('error');
+            setTimeout(() => setStatus(''), 5000);
+        }
+    };
+
     return (
         <section id="contact" className="section bg-alt">
             <div className="container">
@@ -15,7 +42,7 @@ const Contact = () => {
                                 <div className="icon-box"><i className="fa-solid fa-envelope"></i></div>
                                 <div>
                                     <h4>Email</h4>
-                                    <a href="mailto:jinson@example.com">jinson@example.com</a>
+                                    <a href="mailto:kutty2079@gmail.com">kutty2079@gmail.com</a>
                                 </div>
                             </div>
                             <div className="contact-item">
@@ -28,24 +55,41 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className="contact-form-container">
-                        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                        <form className="contact-form" onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <input type="text" id="name" required placeholder="Your Name" />
+                                <input type="text" id="name" name="entry.358739733" required placeholder="Your Name" />
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-group">
-                                <input type="email" id="email" required placeholder="Your Email" />
+                                <input type="email" id="email" name="entry.1119087509" required placeholder="Your Email" />
                                 <label htmlFor="email">Email</label>
                             </div>
                             <div className="form-group">
-                                <textarea id="message" rows="5" required placeholder="Your Message"></textarea>
+                                <textarea id="message" name="entry.954233664" rows="5" required placeholder="Your Message"></textarea>
                                 <label htmlFor="message">Message</label>
                             </div>
-                            <button type="submit" className="btn btn-primary btn-block">Send Message <i className="fa-solid fa-paper-plane"></i></button>
+                            <button type="submit" className="btn btn-primary btn-block" disabled={status === 'submitting'}>
+                                {status === 'submitting' ? 'Sending...' : 'Send Message'} <i className="fa-solid fa-paper-plane"></i>
+                            </button>
+                            {status === 'error' && <div style={{ color: '#ef4444', marginTop: '1rem', textAlign: 'center', fontWeight: '500' }}>Something went wrong. Please try again.</div>}
                         </form>
                     </div>
                 </div>
             </div>
+
+            {/* Success Popup */}
+            {showPopup && (
+                <div className="popup-overlay active" onClick={() => setShowPopup(false)}>
+                    <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="popup-icon">
+                            <i className="fa-regular fa-circle-check"></i>
+                        </div>
+                        <h3>Message Sent Successfully!</h3>
+                        <p>Thank you for reaching out. I will get back to you soon.</p>
+                        <button className="btn btn-primary" onClick={() => setShowPopup(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

@@ -82,7 +82,7 @@ const Navigation = () => {
                     <button id="theme-toggle" aria-label="Toggle dark/light theme" onClick={toggleTheme}>
                         {theme === 'light' ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
                     </button>
-                    <a href="#" className="btn btn-outline" download="Jinson_Resume.pdf">
+                    <a href="/Jinson_Resume.pdf" className="btn btn-outline" download="Jinson_Resume.pdf">
                         <i className="fa-solid fa-download"></i> Resume
                     </a>
                     <button className="mobile-menu-btn" aria-label="Open menu" onClick={toggleMenu}>
