@@ -9,11 +9,20 @@ import Education from './components/Education';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
+    // Check for 404
+    const path = window.location.pathname;
+    const isRoot = path === '/' || path === '/jinsonportfolio/' || path.endsWith('index.html');
+    if (!isRoot) {
+      setIsNotFound(true);
+      setLoading(false);
+    }
     // Reveal Intersection Observer
     const revealElements = document.querySelectorAll('.reveal, .reveal-right, .reveal-left');
     const revealOptions = {
@@ -37,6 +46,10 @@ function App() {
       revealElements.forEach(el => revealOnScroll.unobserve(el));
     };
   }, [loading]); // Re-run when loading finishes so elements are in DOM
+
+  if (isNotFound) {
+    return <NotFound />;
+  }
 
   return (
     <>
