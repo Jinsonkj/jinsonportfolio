@@ -1184,3 +1184,26 @@ footer {
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(57, 172, 49, 0.6);
 }
+
+/* --- Responsive Adjustments for 404 Page --- */
+@media (max-width: 768px) {
+    .four_zero_four_bg {
+        height: 280px;
+        background-size: contain;
+    }
+    .four_zero_four_bg h1 {
+        font-size: 60px;
+    }
+    .contant_box_404 {
+        margin-top: -20px;
+    }
+    .contant_box_404 h3 {
+        font-size: 26px;
+    }
+    .contant_box_404 p {
+        font-size: 16px;
+    }
+    .page_404 {
+        padding: 20px 0;
+    }
+}
