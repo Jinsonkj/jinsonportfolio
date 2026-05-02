@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Navigation = () => {
     const [theme, setTheme] = useState('dark');
@@ -65,7 +66,13 @@ const Navigation = () => {
     };
 
     return (
-        <nav id="navbar" className={`glass-nav ${scrolled ? 'scrolled' : ''}`}>
+        <motion.nav 
+            id="navbar" 
+            className={`glass-nav ${scrolled ? 'scrolled' : ''}`}
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="nav-container">
                 <a href="#hero" className="logo" onClick={closeMenu}><span>J</span>inson.</a>
                 
@@ -90,7 +97,7 @@ const Navigation = () => {
                     </button>
                 </div>
             </div>
-        </nav>
+        </motion.nav>
     );
 };
 

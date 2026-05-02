@@ -23,29 +23,7 @@ function App() {
       setIsNotFound(true);
       setLoading(false);
     }
-    // Reveal Intersection Observer
-    const revealElements = document.querySelectorAll('.reveal, .reveal-right, .reveal-left');
-    const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, revealOptions);
-
-    revealElements.forEach(el => revealOnScroll.observe(el));
-
-    // Cleanup
-    return () => {
-      revealElements.forEach(el => revealOnScroll.unobserve(el));
-    };
-  }, [loading]); // Re-run when loading finishes so elements are in DOM
+  }, [loading]);
 
   if (isNotFound) {
     return <NotFound />;

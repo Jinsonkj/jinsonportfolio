@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
     const [status, setStatus] = useState('');
@@ -7,7 +8,7 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('submitting');
-        
+
         const form = e.target;
         const data = new FormData(form);
 
@@ -31,9 +32,21 @@ const Contact = () => {
     return (
         <section id="contact" className="section bg-alt">
             <div className="container">
-                <h2 className="section-title reveal">Get In Touch</h2>
-                <div className="contact-wrapper reveal">
-                    <div className="contact-info">
+                <motion.h2
+                    className="section-title"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >Get In Touch</motion.h2>
+                <div className="contact-wrapper">
+                    <motion.div
+                        className="contact-info"
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    >
                         <h3>Let's build something amazing together.</h3>
                         <p>If you're looking for an Angular developer to join your team or have a project in mind, feel free to reach out.</p>
 
@@ -42,7 +55,8 @@ const Contact = () => {
                                 <div className="icon-box"><i className="fa-solid fa-envelope"></i></div>
                                 <div>
                                     <h4>Email</h4>
-                                    <a href="mailto:kutty2079@gmail.com">kutty2079@gmail.com</a>
+                                    <a href="mailto:kutty2079@gmail.com" style={{ display: 'block', marginBottom: '0.2rem' }}>kutty2079@gmail.com</a>
+                                    <a href="mailto:jinson47@yahoo.com" style={{ display: 'block' }}>jinson47@yahoo.in</a>
                                 </div>
                             </div>
                             <div className="contact-item">
@@ -53,8 +67,14 @@ const Contact = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="contact-form-container">
+                    </motion.div>
+                    <motion.div
+                        className="contact-form-container"
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    >
                         <form className="contact-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <input type="text" id="name" name="entry.358739733" required placeholder="Your Name" />
@@ -73,7 +93,7 @@ const Contact = () => {
                             </button>
                             {status === 'error' && <div style={{ color: '#ef4444', marginTop: '1rem', textAlign: 'center', fontWeight: '500' }}>Something went wrong. Please try again.</div>}
                         </form>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 

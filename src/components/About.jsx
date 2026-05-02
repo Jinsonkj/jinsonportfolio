@@ -1,12 +1,25 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const About = () => {
     return (
         <section id="about" className="section">
             <div className="container">
-                <h2 className="section-title reveal">About Me</h2>
+                <motion.h2 
+                    className="section-title"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >About Me</motion.h2>
                 <div className="about-content">
-                    <div className="about-text reveal">
+                    <motion.div 
+                        className="about-text"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    >
                         <p>I am a highly motivated <strong>Front-End Developer</strong> with <strong>over 6 years of
                                 experience</strong>, currently working as an IT Analyst at <strong>TCS in Kochi</strong>. I
                             hold a Master's in Computer Applications (MCA) from Nirmala College and specialize in the
@@ -29,7 +42,7 @@ const About = () => {
                                 <span>User-friendly UI</span>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

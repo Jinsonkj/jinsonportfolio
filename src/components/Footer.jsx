@@ -1,10 +1,16 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
     const year = new Date().getFullYear();
 
     return (
-        <footer>
+        <motion.footer
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="container footer-content">
                 <div className="footer-logo"><span>J</span>inson.</div>
                 <div className="social-links footer-socials">
@@ -15,7 +21,7 @@ const Footer = () => {
                 </div>
                 <p>&copy; <span>{year}</span> Jinson. All rights reserved.</p>
             </div>
-        </footer>
+        </motion.footer>
     );
 };
 

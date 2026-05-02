@@ -1,13 +1,38 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Projects = () => {
     return (
         <section id="projects" className="section">
             <div className="container">
-                <h2 className="section-title reveal">Featured Projects</h2>
-                <div className="projects-grid">
+                <motion.h2 
+                    className="section-title"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >Featured Projects</motion.h2>
+                <motion.div 
+                    className="projects-grid"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={{
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.2
+                            }
+                        }
+                    }}
+                >
                     {/* Project 1 */}
-                    <div className="project-card reveal">
+                    <motion.div 
+                        className="project-card"
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                        }}
+                    >
                         <div className="project-img placeholder">
                             <i className="fa-solid fa-laptop-code"></i>
                         </div>
@@ -24,9 +49,15 @@ const Projects = () => {
                                 <a href="#" className="btn btn-sm btn-primary"><i className="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                     {/* Project 2 */}
-                    <div className="project-card reveal" style={{ transitionDelay: '100ms' }}>
+                    <motion.div 
+                        className="project-card"
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                        }}
+                    >
                         <div className="project-img placeholder">
                             <i className="fa-solid fa-mobile-screen"></i>
                         </div>
@@ -43,8 +74,8 @@ const Projects = () => {
                                 <a href="#" className="btn btn-sm btn-primary"><i className="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     );

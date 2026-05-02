@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Skills = () => {
     const skills = [
@@ -15,16 +16,39 @@ const Skills = () => {
     return (
         <section id="skills" className="section bg-alt">
             <div className="container">
-                <h2 className="section-title reveal">Technical Skills</h2>
-                <div className="skills-grid reveal">
+                <motion.h2 
+                    className="section-title"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >Technical Skills</motion.h2>
+                <motion.div 
+                    className="skills-grid"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={{
+                        visible: {
+                            transition: { staggerChildren: 0.1 }
+                        }
+                    }}
+                >
                     {skills.map((skill, index) => (
-                        <div className="skill-card" key={index}>
+                        <motion.div 
+                            className="skill-card" 
+                            key={index}
+                            variants={{
+                                hidden: { opacity: 0, scale: 0.9, y: 20 },
+                                visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
+                            }}
+                        >
                             <i className={`${skill.isSolid ? 'fa-solid' : 'fa-brands'} ${skill.icon} tech-icon`} style={{ color: skill.color }}></i>
                             <h3>{skill.title}</h3>
                             <p>{skill.desc}</p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
